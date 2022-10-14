@@ -37,7 +37,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 
 	TextField id = new TextField("아이디");
 	JPasswordField password = new JPasswordField("*****");
-	
+
 	JCheckBox checkBox = new JCheckBox();
 	JLabel staySignedIn = new JLabel("로그인 상태 유지");
 
@@ -160,7 +160,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 		JButton targetButton = (JButton) e.getSource();
 		if (targetButton.getText().equals(logInbutton.getText())) {
 			System.out.println("로그인 버튼 눌러짐!");
-		} 
+		}
 
 	}
 
@@ -224,8 +224,8 @@ public class LoginFrame extends JFrame implements ActionListener {
 		}
 	}
 	// 둥근 버튼 만드는 클래스
-	
-	//sql connect
+
+	// sql connect
 	public static void connectJ() {
 		try {
 
@@ -233,33 +233,31 @@ public class LoginFrame extends JFrame implements ActionListener {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		
+
 		String url = "jdbc:mysql://localhost:3306/userinfo?serverTimezone=Asia/Seoul&characterEncoding=UTF-8";
 		try {
 			Connection conn = DriverManager
-					.getConnection(url, "root", "dlfdl123");
+					// .getConnection(url, "root", "dlfdl123");
+					.getConnection(url, "root", "asd1234");
 			Statement stmt = conn.createStatement();
-			String  sql = "SELECT * FROM userinfo";
+			String sql = "SELECT * FROM userinfo";
 			ResultSet rs = stmt.executeQuery(sql);
-			while(rs.next()) {
+			while (rs.next()) {
 				System.out.println(rs.getString("userId"));
 				System.out.println(rs.getString("userName"));
-				
-			};
-			
-			} catch (SQLException e) {
+
+			}
+			;
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	
-	
 	public static void main(String[] args) {
 		new LoginFrame();
 		connectJ();
-		
-		
-		
+
 	}
 
 }
