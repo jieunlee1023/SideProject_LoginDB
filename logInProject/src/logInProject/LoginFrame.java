@@ -10,6 +10,11 @@ import java.awt.RenderingHints;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.Action;
 import javax.swing.Icon;
@@ -18,6 +23,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPasswordField;
 
 public class LoginFrame extends JFrame implements ActionListener {
 
@@ -30,8 +36,8 @@ public class LoginFrame extends JFrame implements ActionListener {
 	JLabel qrImg = new JLabel(new ImageIcon("images/qr.png"));
 
 	TextField id = new TextField("아이디");
-	TextField password = new TextField("비밀번호");
-
+	JPasswordField password = new JPasswordField("*****");
+	
 	JCheckBox checkBox = new JCheckBox();
 	JLabel staySignedIn = new JLabel("로그인 상태 유지");
 
@@ -218,9 +224,42 @@ public class LoginFrame extends JFrame implements ActionListener {
 		}
 	}
 	// 둥근 버튼 만드는 클래스
+	
+	//sql connect
+	public static void connectJ() {
+		try {
 
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		String url = "jdbc:mysql://localhost:3306/userinfo?serverTimezone=Asia/Seoul&characterEncoding=UTF-8";
+		try {
+			Connection conn = DriverManager
+					.getConnection(url, "root", "dlfdl123");
+			Statement stmt = conn.createStatement();
+			String  sql = "SELECT * FROM userinfo";
+			ResultSet rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				System.out.println(rs.getString("userId"));
+				System.out.println(rs.getString("userName"));
+				
+			};
+			
+			} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	
+	
 	public static void main(String[] args) {
 		new LoginFrame();
+		connectJ();
+		
+		
+		
 	}
 
 }
