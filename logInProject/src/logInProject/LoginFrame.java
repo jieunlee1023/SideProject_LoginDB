@@ -25,8 +25,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 public class LoginFrame extends JFrame implements ActionListener {
+
+	private LoginFrame mContext = this;
+	ResultSet rs;
 
 	JLabel logo = new JLabel(new ImageIcon("images/logo.png"));
 	JButton logIn = new JButton("ID 로그인");
@@ -166,22 +170,23 @@ public class LoginFrame extends JFrame implements ActionListener {
 				String url = "jdbc:mysql://localhost:3306/userinfo?serverTimezone=Asia/Seoul&characterEncoding=UTF-8";
 				Connection conn = DriverManager
 						// .getConnection(url, "root", "dlfdl123");
-						.getConnection(url, "root", "dlfdl123");
+						.getConnection(url, "root", "asd1234");
 				String userid = id.getText();
 				String userpw = password.getText();
 				Statement stmt = conn.createStatement();
-				
-				String sql = "SELECT * FROM userinfo where userId = '"+userid+"' and userPw = '"+userpw+"'";
-				ResultSet rs = stmt.executeQuery(sql);
-			if (rs.next()) {
-				dispose();
-				new HomePage();
-				
-				
-			}else {
-				JOptionPane.showMessageDialog(this, "일치하는 정보가 없습니다.");
-				
-			}
+
+				String sql = "SELECT * FROM userinfo where userId = '" + userid + "' and userPw = '" + userpw + "'";
+				rs = stmt.executeQuery(sql);
+
+				if (rs.next()) {
+					dispose();
+					this.setVisible(false);
+					HomePage hp = new HomePage(mContext);
+					hp.userInfo();
+				} else {
+					JOptionPane.showMessageDialog(this, "일치하는 정보가 없습니다.");
+				}
+
 			} catch (ClassNotFoundException e1) {
 				e1.printStackTrace();
 			}
@@ -189,8 +194,6 @@ public class LoginFrame extends JFrame implements ActionListener {
 			catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-
-			System.out.println("로그인 버튼 눌러짐!");
 		}
 
 	}
@@ -255,7 +258,6 @@ public class LoginFrame extends JFrame implements ActionListener {
 		}
 	}
 	// 둥근 버튼 만드는 클래스
-
 
 	public static void main(String[] args) {
 		new LoginFrame();

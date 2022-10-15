@@ -1,6 +1,7 @@
 package logInProject;
 
 import java.awt.Color;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -12,23 +13,30 @@ import javax.swing.border.TitledBorder;
 
 public class HomePage extends JFrame {
 
-	JLabel naver;
-	JPanel window;
-	JPanel statusWindow;
-	JLabel myProfile;
+	private LoginFrame mContext;
 
-	JLabel id;
-	JTextField idField;
-	JLabel name;
-	JTextField nameField;
-	JLabel email;
-	JTextField emailField;
-	JLabel address;
-	JTextField addressField;
-	JLabel phoneNumber;
-	JTextField phoneNumberField;
+	private JLabel naver;
+	private JPanel window;
+	private JPanel statusWindow;
+	private JLabel myProfile;
 
-	public HomePage() {
+	private JLabel id;
+	private JTextField idField;
+	private JLabel name;
+	private JTextField nameField;
+	private JLabel email;
+	private JTextField emailField;
+	private JLabel address;
+	private JTextField addressField;
+	private JLabel phoneNumber;
+	private JTextField phoneNumberField;
+
+	public void setIdField(JTextField idField) {
+		this.idField = idField;
+	}
+
+	public HomePage(LoginFrame mContext) {
+		this.mContext = mContext;
 		initDate();
 		setInitLayout();
 		addActionListener();
@@ -116,8 +124,17 @@ public class HomePage extends JFrame {
 		statusWindow.add(txt);
 	}
 
-	public static void main(String[] args) {
-		new HomePage();
+	public void userInfo() {
+		String userId;
+		try {
+			userId = mContext.rs.getString("userId");
+			idField.setText(userId);
+			String userName = mContext.rs.getString("userName");
+			nameField.setText(userName);
+			String userAddr = mContext.rs.getString("userAddr");
+			addressField.setText(userAddr);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
-
 }

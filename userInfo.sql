@@ -15,6 +15,6 @@ create table userInfo(
 
 
 insert into userInfo values('1000bang', '천병재', 'asdf123', '부산시 수영구', now());
-
+insert into userInfo values('ji_euni', '이지은', 'asd1234', '부산시 북구', now());
 
 select * from userInfo;
