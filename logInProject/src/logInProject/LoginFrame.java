@@ -169,8 +169,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				String url = "jdbc:mysql://localhost:3306/userinfo?serverTimezone=Asia/Seoul&characterEncoding=UTF-8";
 				Connection conn = DriverManager
-						// .getConnection(url, "root", "dlfdl123");
-						.getConnection(url, "root", "dlfdl123");
+						.getConnection(url, "root", "asd1234");
 				String userid = id.getText();
 				String userpw = password.getText();
 				Statement stmt = conn.createStatement();

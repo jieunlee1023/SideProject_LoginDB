@@ -24,6 +24,7 @@ public class HomePage extends JFrame implements ActionListener{
 	private JPanel statusWindow;
 	private JLabel myProfile;
 	private ImageIcon bang;
+	private ImageIcon je;
 	private JLabel id;
 	private JTextField idField;
 	private JLabel name;
@@ -58,6 +59,7 @@ public class HomePage extends JFrame implements ActionListener{
 		statusWindow = new JPanel();
 		myProfile = new JLabel(new ImageIcon("images/profile.png"));
 		bang = new ImageIcon("images/bang.png");
+		je = new ImageIcon("images/je.png");
 		id = new JLabel("아이디 : ");
 		idField = new JTextField();
 		name = new JLabel("이름 : ");
@@ -86,7 +88,7 @@ public class HomePage extends JFrame implements ActionListener{
 		statusWindow.setBorder(new TitledBorder(new LineBorder(Color.lightGray, 2)));
 		window.add(statusWindow);
 		
-		logout.setBounds(40,240,70,40);
+		logout.setBounds(20,240,70,40);
 		logout.setBorderPainted(false);
 		logout.setContentAreaFilled(false); 
 		logout.setFocusPainted(false); 
@@ -121,7 +123,6 @@ public class HomePage extends JFrame implements ActionListener{
 			dispose();
 			JOptionPane.showMessageDialog(this, "로그아웃 완료 ");
 			new LoginFrame();
-			
 		}
 	}
 
@@ -152,6 +153,8 @@ public class HomePage extends JFrame implements ActionListener{
 			phoneNumberField.setText(userPhoneNum);
 			if(userId.equals("1000bang")) {
 				myProfile.setIcon(bang);
+			} else if(userId.equals("ji_euni")) {
+				myProfile.setIcon(je);
 			}
 			
 		} catch (SQLException e) {

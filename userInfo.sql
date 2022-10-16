@@ -25,3 +25,6 @@ insert into userInfo values('guest', 'guest', '1234', '', now(),'');
 
 update userInfo set userPhoneNum = "010-1234-1234"
 where userId = "1000bang";
+
+update userInfo set userPhoneNum = "010-1111-2222"
+where userId = "ji_euni";
